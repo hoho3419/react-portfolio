@@ -2,9 +2,14 @@ import React from 'react';
 import { styled } from 'styled-components';
 import { Flex, primary, spacingMove, Line,DescBox,Stick } from '../../style/boxstyle';
 import SkillItem from './SkillItem';
-import { FaBuilding } from 'react-icons/fa'
+import { FaBuilding } from 'react-icons/fa';
+import { HiAcademicCap } from 'react-icons/hi';
+import { Skills } from '../utils/Skills';
+import { motion } from 'framer-motion';
+
 
 const AboutPage = () => {
+
   return (
     <>
       <TitleBox>
@@ -16,26 +21,47 @@ const AboutPage = () => {
       <SectionContainer>
         <h3>My Skills📌</h3>
         <SkillBox>
-          <SkillItem />
-          <SkillItem />
-          <SkillItem />
-          <SkillItem />
-          <SkillItem />
-          <SkillItem />
+          {Skills.map((el,idx) => (
+            <SkillItem 
+              key={el.id}
+              id={idx}
+              icon={el.icon}
+              Title={el.Title}
+              desc={el.desc}
+            />
+          ))}
         </SkillBox>
       </SectionContainer>
       <Line/>
       <SectionContainer>
-        <h3>Experience📕 & Education🎓</h3>
+        <h3 >Experience📕 & Education🎓</h3>
         <ExperEduBox>
           <ExEducation>
-            <IconBox>
+            <IconBox
+              whileHover={{ y: [0,-20,0]}}
+            >
               <FaBuilding />
             </IconBox>
             <TextBox>
-              <Date><span>2019.08 - 2019.09</span></Date>
-              <ProTitle>스마트웹&앱콘텐츠제작 <span> ㅡ 양성과정더조은컴퓨터학원</span></ProTitle>
-              <DescBox><Stick /> GUI 디자인 가이드를 바탕으로 UI 구현 표준을 수립하고 UI를 제작하는 법을 학습하였습니다. 동시에 구현된 UI를 검증하기 위하여 사용성 테스트 계획, 수행, 분석, 결과 보고를 수행하는 역량을 길렀습니다.</DescBox>
+              <Date><span>2023.01.26 ~ 2023.04.26</span></Date>
+              <ProTitle>블록체인 기반 보안 프로젝트 <span> ㅡ 잇핀</span></ProTitle>
+              <DescBox><Stick /> 보안 프로젝트를 진행하면서 대칭키와 비대칭키 등 다양한 보안에 네트워크 대한 이해도를 학습했습니다.</DescBox>
+              <DescBox><Stick />프로젝트에 대한 회의를 진행할때 회의록을 작성하며 정보 기록 및 문서화, 커뮤니케이션 개선 능력을 향상시켰습니다.</DescBox>
+              <DescBox><Stick /> C와  C++ 언어를 사용하며 정적타입 언어와 객체지향에 대해서 학습하였습니다.</DescBox>
+            </TextBox>
+          </ExEducation>
+          <ExEducation>
+            <IconBox
+              whileHover={{ y: [0,-20,0]}}
+            >
+              <HiAcademicCap />
+            </IconBox>
+            <TextBox>
+              <Date><span>2022.05 - 2023.01</span></Date>
+              <ProTitle>반응형 UI /UX 웹콘텐츠 개발자 양성과정<span> ㅡ kh 정보 교육원</span></ProTitle>
+              <DescBox><Stick />웹 프론트와 백엔드를 모두 경험하면서 들으며 웹 서비스 제작에 전체적인 이해도를 갖추었습니다.</DescBox>
+              <DescBox><Stick />Java, Spring, Javascript, DB 등 다양한 언어와 도구를 사용하면서 웹 제작 능력을 향상 시켰습니다.</DescBox>
+              <DescBox><Stick /> 팀 프로젝트와 개인프로젝트를 진행하며 웹 개발에 전체적인 이해와 gitflow 및 팀원들간에 커뮤니케이션을 학습했습니다.</DescBox>
             </TextBox>
           </ExEducation>
         </ExperEduBox>
@@ -71,7 +97,7 @@ export const Title = styled.h2`
     font-size: 6.5rem;
     font-weight: 900;
     letter-spacing: 5rem;
-    opacity: 0.1;
+    opacity: 0.07;
     animation: ${spacingMove} 1s ease-in-out .3s 1 normal forwards;
   }
 `;
@@ -82,7 +108,7 @@ const SectionContainer = styled.section`
     font-size: 2.5rem;
     font-weight: 500;
     text-align: center;
-    margin: 2.5rem 0;
+    margin: 2.5rem 0 5rem 0;
   }
 `;
 // Skills
@@ -94,6 +120,9 @@ const SkillBox = styled(Flex)`
 // Edcucation
 const ExperEduBox = styled(Flex)`
   width: 100%;
+  flex-wrap: wrap;
+  padding: 2.5rem 0;
+  margin: 2.5rem 0;
 `;
 const ExEducation = styled(Flex)`
   width: calc(50%);
@@ -111,12 +140,16 @@ const ExEducation = styled(Flex)`
     left: 20px;
     top: 20px;
   }
+  @media screen and (max-width: 768px){
+    width: calc(100%);
+  }
 `;
-const IconBox = styled(Flex)`
+const IconBox = styled(motion.div)`
   width: 3rem;
   height: 3rem;
   border-radius: 20rem;
-  background-color: ${primary} ;
+  background-color: ${primary};
+  display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
