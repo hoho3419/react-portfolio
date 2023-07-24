@@ -2,11 +2,19 @@ import React from 'react';
 import { styled } from 'styled-components';
 import { Flex,primary } from '../../style/boxstyle';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Rigth = () => {
   return (
     <Section>
-      <HeadTitle>I'M<span> FRONT-END DEVELOPER</span></HeadTitle>
+      <HeadTitle
+        initial={{ opacity: 0, y: -50}}
+        animate={{ opacity: 1, y: 0}}
+        exit={{ opacity: 0, y: -50 }}
+        transition={{ duration: .5 }}
+      >
+        I'M<span> FRONT-END DEVELOPER</span>
+      </HeadTitle>
       <TitleBox>
         <p>안녕하세요!😀 저는 프론트엔드 개발자 이철호 입니다.</p>
         <span>호기심이 많아 새로운 프레임워크나⚒ 라이브러리에📕 대해서 탐구하고 사용하며, 항상 "왜?"❓라는 질문을 통해 전체적인 프로세스에 대해 이해하고 성장하는 것을 중요시하고 있습니다.</span>
@@ -50,7 +58,7 @@ const Section = styled(Flex)`
   }
 `;
 
-const HeadTitle = styled.h1`
+const HeadTitle = styled(motion.h1)`
   margin: 0;
   margin-bottom: 2rem;
   font-size: 2.5rem;

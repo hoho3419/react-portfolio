@@ -1,16 +1,22 @@
 import React from 'react';
 import { styled } from 'styled-components'
-import { Flex,primary } from '../../style/boxstyle';
+import { primary } from '../../style/boxstyle';
 import { Link, useLocation } from 'react-router-dom';
 import { AiTwotoneHome,AiFillGithub } from 'react-icons/ai';
 import { FaListAlt,FaUserAlt } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const Header = () => {
   const pathname = useLocation().pathname;
 
   return (
     <StyledHeader>
-      <Navbar>
+      <Navbar
+        initial={{ opacity: 0, y: -50}}
+        animate={{ opacity: 1, y: 0}}
+        exit={{ opacity: 0, y: -50 }}
+        transition={{ duration: .5, delay: .5 }}
+      >
         <StyledLink 
           to={'/'} 
           className={pathname === '/' ? 'active': ''}
@@ -53,11 +59,17 @@ const StyledHeader = styled.header`
   z-index: 100;
 `;
 
-const Navbar = styled(Flex)`
+const Navbar = styled(motion.div)`
+  display: flex;
+  position: relative;
   justify-content: center;
   flex-direction: column;
   gap: 1.25rem;
   height: 100%;
+  @media screen and (max-width: 600px){
+    justify-content: flex-start;
+    margin-top: 11rem;
+  }
 `;
 
 const TitleNav = styled.span`
@@ -89,7 +101,8 @@ const StyledLink = styled(Link)`
     height: 1.7rem;
   }
   &:hover {
-    background-color:${primary} ;
+    background-color:${primary};
+    transform: translateX(-.8rem);
      ${TitleNav} {
       // hover한 StyledLink 컴포넌트 내부의 TitleNav에만 효과 적용
       color: #fff;
@@ -99,6 +112,7 @@ const StyledLink = styled(Link)`
   &.active{
     background-color: ${primary} ;
     pointer-events: none;
+    transform: translateX(-.8rem);
   }
 `;
 

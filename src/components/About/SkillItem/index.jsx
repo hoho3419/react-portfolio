@@ -1,37 +1,44 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import { Flex, primary,DescBox,Stick } from '../../../style/boxstyle';
-import { FaReact } from 'react-icons/fa'
+import { motion } from 'framer-motion';
 
-const SkillItem = () => {
+const SkillItem = ({ id,icon,Title,desc }) => {
   return (
-    <ItemBox>
+    <ItemBox
+      whileHover={{ borderColor:primary, y: -20 }}
+    >
       <IconBox>
-        <FaReact /><span>: React</span>
+        { icon }<span>: {Title}</span>
       </IconBox>
-      <DescBox>
-        <Stick /> <span>리덕스를 사용하여 상태관리를 할 수 있습니다.글고 정말 잘할 ㅅ 있다</span>
-      </DescBox>
-      <DescBox>
-        <Stick /> <span>리덕스를 사용하여 사용하여사용하여사용하여사용하여사용하여사용하여 상태관리를 할 수 있습니다.</span>
-      </DescBox>
-      <DescBox>
-        <Stick /> <span>리덕스를 사용하여 사용하여사용하여사용하여 상태관리를 할 수 있습니다.</span>
-      </DescBox>
+      {desc.map((el,idx) => (
+        <DescBox key={idx}>
+          <Stick /> <span>{el}</span>
+        </DescBox>
+      ))}
     </ItemBox>
   );
 };
 
 export default SkillItem;
 
-const ItemBox = styled(Flex)`
+const ItemBox = styled(motion.div)`
   width: calc(33% - 3rem);
+  display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   color: #ffffffcc;
   border: 1px solid #252525;
   padding: 1rem 1.2rem;
   box-sizing: border-box;
+  @media screen and (max-width: 950px){
+    width: calc(50% - 3rem);
+  }
+  @media screen and (max-width: 600px){
+    width: calc(100%);
+    padding: 3rem 1.2rem;
+  }
 `;
 
 const IconBox = styled(Flex)`
@@ -42,5 +49,8 @@ const IconBox = styled(Flex)`
   margin-bottom: 1rem;
   svg {
     color: ${primary};
+  }
+  @media screen and (max-width: 600px){
+    font-size: 3rem;
   }
 `;
