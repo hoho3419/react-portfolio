@@ -24,4 +24,10 @@ const FlexContainer = styled(Flex)`
   align-items: center;
   padding: 0 5rem;
   box-sizing: border-box;
+  @media screen and (max-width: 950px){
+    padding: 0 3rem;
+  }
+  @media screen and (max-width: 600px){
+    padding: 0 1rem;
+  }
 `;
